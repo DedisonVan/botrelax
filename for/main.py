@@ -71,9 +71,13 @@ time.sleep(3)
 browser.save_screenshot('first1.png')
 # Нажимаем на кнопку "Увійти"
 login_button = browser.find_element(by=By.NAME, value="login-button")
-browser.execute_script("arguments[0].click();", login_button)
+browser.execute_script("arguments[0].scrollIntoView();", login_button)
 time.sleep(2)
+login_button.click()
 browser.save_screenshot('last1.png')
+
+button = browser.find_element(by=By.CSS_SELECTOR, value=".sth-btn-shaped-lime[name='login-button']")
+browser.execute_script("arguments[0].click();", button)
 
 time.sleep(3)
 login_button = browser.find_element(by=By.NAME, value="login-button")
