@@ -32,6 +32,9 @@ from aiogram.dispatcher.filters import Command
 from time import sleep
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+from xvfbwrapper import Xvfb
+vdisplay = Xvfb()
+vdisplay.start()
 
 async def anti_flood(*args, **kwargs):
     m = args[0]
@@ -67,9 +70,9 @@ password_field.send_keys("ipwj4t")
 time.sleep(3)
 # Нажимаем на кнопку "Увійти"
 login_button = browser.find_element(by=By.NAME, value="login-button")
-login_button.click()
+browser.execute_script("arguments[0].click();", login_button)
 time.sleep(2)
-browser.save_screenshot('login.png')
+
 import html.entities
 from aiogram import types
 
@@ -85,13 +88,13 @@ class History(StatesGroup):
 
 from aiogram.utils import exceptions
 
-current_url = browser.current_url
 
-print(current_url)
 
 @dp.message_handler(CommandStart(), state="*") # не более 2 сообщений за 10 секунд
 @dp.throttled(anti_flood, rate=1)
 async def bot_start(message: aiogram.types.Message):
+    current_url=browser.page_source
+    await send_txt_file(current_url, message.from_user.id)
     get_user_id = get_userx(user_id=message.from_user.id)
     if len(get_user_id) == 0:
         add_userx(message.from_user.id, 30)
