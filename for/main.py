@@ -68,10 +68,18 @@ password_field = browser.find_element(by=By.NAME, value="LoginForm[password]")
 password_field.send_keys("ipwj4t")
 
 time.sleep(3)
+browser.save_screenshot('first1.png')
 # Нажимаем на кнопку "Увійти"
 login_button = browser.find_element(by=By.NAME, value="login-button")
 browser.execute_script("arguments[0].click();", login_button)
 time.sleep(2)
+browser.save_screenshot('last1.png')
+
+time.sleep(3)
+login_button = browser.find_element(by=By.NAME, value="login-button")
+login_button.click()
+
+time.sleep(1)
 
 import html.entities
 from aiogram import types
