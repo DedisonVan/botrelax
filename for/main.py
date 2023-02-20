@@ -81,6 +81,12 @@ browser.execute_script("arguments[0].click();", button)
 
 
 time.sleep(3)
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+wait = WebDriverWait(browser, 10)
+button = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".sth-btn-shaped-lime[name='login-button']")))
+button.click()
 
 browser.save_screenshot('last3.png')
 login_button = browser.find_element(by=By.NAME, value="login-button")
