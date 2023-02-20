@@ -77,6 +77,8 @@ login_button.click()
 import html.entities
 from aiogram import types
 
+time.sleep(3)
+browser.save_screenshot("log.png")
 import os
 
 regex = r'^(https?:\/\/)?(www\.)?naurok\.com\.ua\/.*\.html$'
